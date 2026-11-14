@@ -1,3 +1,319 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Westbury Kids Games</title>
-<style>body{font-family:system-ui;background:#fff7e6;text-align:center;padding:30px}a{display:block;margin:20px auto;max-width:400px;padding:30px;font-size:32px;background:#00c2d1;color:#fff;border-radius:24px;text-decoration:none}</style></head>
-<body><h1>Westbury Kids Games</h1><a href="chase-bot.html">🤖 Chase Bot!</a><p>Made by Stella, Oliver &amp; Georgia</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Westbury Family Hub — Chase Bot, family trivia, and the links we actually use.">
+<meta name="theme-color" content="#fff7e6">
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Family Hub">
+<title>Westbury Family Hub</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fff7e6;
+    --ink: #1c2b30;
+    --muted: #5d6a6e;
+    --accent: #00c2d1;
+    --label: #0e7490;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(140px 90px at 110% -20px, rgba(0, 194, 209, 0.22), transparent 70%),
+      radial-gradient(180px 120px at -40px 20px, rgba(255, 207, 90, 0.45), transparent 72%),
+      var(--bg);
+    padding:
+      calc(22px + env(safe-area-inset-top))
+      20px
+      calc(32px + env(safe-area-inset-bottom));
+  }
+
+  .wrap {
+    width: min(100%, 440px);
+    margin: 0 auto;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    font-size: 34px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 0 rgba(14, 116, 144, 0.12);
+  }
+
+  .kicker {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--label);
+  }
+
+  h1 {
+    margin: 2px 0 0;
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .lede {
+    margin: 14px 0 0;
+    font-size: 17px;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .section { margin-top: 28px; }
+
+  .section h2 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--label);
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .tile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 116px;
+    padding: 16px;
+    border-radius: 28px;
+    text-decoration: none;
+    color: var(--ink, #08343a);
+    background: var(--tile, var(--accent));
+    box-shadow: 0 8px 0 rgba(8, 52, 58, 0.14);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .tile:active {
+    transform: translateY(3px);
+    box-shadow: 0 4px 0 rgba(8, 52, 58, 0.14);
+  }
+
+  .tile:focus-visible {
+    outline: 3px solid #1c2b30;
+    outline-offset: 3px;
+  }
+
+  .emoji {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    line-height: 1;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .detail {
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .trivia {
+    --tile: #ffcf5a;
+    --ink: #3d2a08;
+    color: #3d2a08;
+    background: #ffcf5a;
+  }
+
+  .trivia .detail { color: #5c4310; }
+
+  .grownups {
+    margin-top: 40px;
+    padding: 16px 14px 14px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.38);
+    border: 1.5px dashed #d7c7a8;
+  }
+
+  .grownups h2 { color: #6d6254; }
+
+  .note {
+    margin: -4px 0 12px;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #6d6254;
+  }
+
+  .quiet {
+    min-height: 96px;
+    color: #3f4638;
+    background: #f6f1e6;
+    box-shadow: none;
+    border: 1px solid #e3d6bf;
+  }
+
+  .quiet .emoji {
+    background: #e4efe4;
+    font-size: 36px;
+  }
+
+  .quiet .title { font-size: 22px; }
+
+  .quiet .detail { color: #5e675c; }
+
+  .quiet:active {
+    transform: none;
+    background: #efe8d8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tile:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🏠</div>
+        <div>
+          <p class="kicker">Westbury</p>
+          <h1>Family Hub</h1>
+        </div>
+      </div>
+      <p class="lede">Everything we use, on this phone.</p>
+    </header>
+
+    <section class="section" aria-labelledby="games-heading">
+      <h2 id="games-heading">Games</h2>
+      <div id="games" class="stack"></div>
+      <noscript>
+        <div class="stack">
+          <a class="tile" href="chase-bot.html">
+            <span class="emoji" aria-hidden="true">🤖</span>
+            <span class="copy">
+              <span class="title">Chase Bot!</span>
+              <span class="detail">Made by Stella, Oliver &amp; Georgia</span>
+            </span>
+          </a>
+        </div>
+      </noscript>
+    </section>
+
+    <section class="section" aria-labelledby="trivia-heading">
+      <h2 id="trivia-heading">Family Trivia</h2>
+      <div class="stack">
+        <a class="tile trivia" href="https://ryanwestbury-eng.github.io/westbury-trivia/">
+          <span class="emoji" aria-hidden="true">🎙️</span>
+          <span class="copy">
+            <span class="title">Family Trivia</span>
+            <span class="detail">Recorded voices. Best in Safari.</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section grownups" aria-labelledby="grownups-heading">
+      <h2 id="grownups-heading">Grown-ups</h2>
+      <p class="note">For Ryan. Not a kids’ game.</p>
+      <a class="tile quiet" href="https://steady-ashy.vercel.app">
+        <span class="emoji" aria-hidden="true">💚</span>
+        <span class="copy">
+          <span class="title">Steady</span>
+          <span class="detail">Water, walks, food, cravings.</span>
+        </span>
+      </a>
+    </section>
+  </div>
+
+<script>
+// Add another game by copying an entry into this list.
+const games = [
+  {
+    href: "chase-bot.html",
+    emoji: "🤖",
+    title: "Chase Bot!",
+    detail: "Made by Stella, Oliver & Georgia",
+    color: "#00c2d1",
+    ink: "#08343a",
+    detailInk: "#0c4a56"
+  }
+];
+
+const gamesList = document.getElementById("games");
+
+for (const game of games) {
+  const link = document.createElement("a");
+  link.className = "tile";
+  link.href = game.href;
+  link.style.background = game.color;
+  link.style.color = game.ink;
+
+  const emoji = document.createElement("span");
+  emoji.className = "emoji";
+  emoji.setAttribute("aria-hidden", "true");
+  emoji.textContent = game.emoji;
+
+  const copy = document.createElement("span");
+  copy.className = "copy";
+
+  const title = document.createElement("span");
+  title.className = "title";
+  title.textContent = game.title;
+
+  const detail = document.createElement("span");
+  detail.className = "detail";
+  detail.textContent = game.detail;
+  detail.style.color = game.detailInk || game.ink;
+
+  copy.append(title, detail);
+  link.append(emoji, copy);
+  gamesList.append(link);
+}
+</script>
+</body>
+</html>
